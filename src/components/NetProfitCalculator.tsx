@@ -18,7 +18,8 @@ const NetProfitCalculator = () => {
 
   const onExpensesChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     setExpenses(Number(event.target.value));
-  }, [setExpenses]);
+    setNetProfit(grossProfit - expenses);
+  }, [setExpenses, expenses, grossProfit]);
 
   return useMemo(() => (
     <div>
