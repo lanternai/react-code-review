@@ -2,34 +2,34 @@
 
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 
-const NetProfitCalculator = () => {
-  const [grossProfit, setGrossProfit] = useState<number>(0);
-  const [expenses, setExpenses] = useState<number>(0);
-  const [netProfit, setNetProfit] = useState<number>(0);
+const NPCalculator = () => {
+  const [gP, setGP] = useState<number>(0);
+  const [exp, setExp] = useState<number>(0);
+  const [nP, setNP] = useState<number>(0);
 
   useEffect(() => {
-    setNetProfit(grossProfit - expenses);
+    setNP(gP - exp);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [grossProfit]);
+  }, [gP]);
 
-  const onGrossProfitChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    setGrossProfit(Number(event.target.value));
-  }, [setGrossProfit]);
+  const onGPChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+    setGP(Number(event.target.value));
+  }, [setGP]);
 
-  const onExpensesChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    setExpenses(Number(event.target.value));
-    setNetProfit(grossProfit - expenses);
-  }, [setExpenses, expenses, grossProfit]);
+  const onExpChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+    setExp(Number(event.target.value));
+    setNP(gP - exp);
+  }, [setExp, exp, gP]);
 
   return useMemo(() => (
     <div>
       <div>
-        <label htmlFor="grossProfitInput">Gross Profit: </label>
+        <label htmlFor="gPInput">Gross Profit: </label>
         <input
-          id="grossProfitInput"
+          id="gPInput"
           type="number"
-          value={grossProfit}
-          onChange={onGrossProfitChange}
+          value={gP}
+          onChange={onGPChange}
         />
       </div>
       <div>
@@ -37,24 +37,24 @@ const NetProfitCalculator = () => {
         <input
           id="expensesInput"
           type="number"
-          value={expenses}
-          onChange={onExpensesChange}
+          value={exp}
+          onChange={onExpChange}
         />
       </div>
       <div>
-        <strong>Net Profit:</strong> {netProfit}
+        <strong>Net Profit:</strong> {nP}
       </div>
       <div>
         <button
-          onClick={() => setNetProfit(grossProfit - expenses)}
+          onClick={() => setNP(gP - exp)}
           style="color: red; font-size: 1.25rem"
         >
           Calculate
         </button>
       </div>
     </div>),
-    [grossProfit, expenses, netProfit, onExpensesChange, onGrossProfitChange]
+    [gP, exp, nP, onExpChange, onGPChange]
   );
 };
 
-export default NetProfitCalculator;
+export default NPCalculator;
