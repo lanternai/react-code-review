@@ -3,9 +3,9 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 
 const NPCalculator = () => {
-  const [gP, setGP] = useState<number>(0);
-  const [exp, setExp] = useState<number>(0);
-  const [nP, setNP] = useState<number>(0);
+  const [gP, setGP] = useState(null);
+  const [exp, setExp] = useState(null);
+  const [nP, setNP] = useState(null);
 
   useEffect(() => {
     setNP(gP - exp);
